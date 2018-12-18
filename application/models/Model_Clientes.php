@@ -63,6 +63,8 @@ class Model_Clientes extends CI_Model
 		$sql=$this->db->select("*")->where("Usuario='$num' and IDEmpresa='$empresa'")->get("clientes");
 		return $sql->result()[0];
 	}
+
+	
 	Public function updateCliente($num,$Tipocontribuyente,$rz,$nombrecomer,$rfc,$IDConfig,$Pais,$Estado,$muicipio,$calle,$Apellido,$Puesto,$correo,$tel){
 		$array=array("Nombre"=>$rz,"RFC"=>$rfc,"Pais"=>$Pais,"Municipio"=>$muicipio,"Direccion"=>$calle,"Puesto"=>$Puesto,"Tel"=>$tel,"EEstado"=>$Estado,"Clave"=>"","Correo"=>$correo,"Actipass"=>1,"IDConfig"=>$IDConfig,"Estado"=>1,"NombreComercial"=>$nombrecomer,"TPersona"=>$Tipocontribuyente,"Apellidos"=>$Apellido);
 		$sql=$this->db->where("IDCliente='$num'")->update("clientes",$array);

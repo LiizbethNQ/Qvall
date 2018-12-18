@@ -56,6 +56,9 @@ class Clientesp extends CI_Controller
 		$data2["pais"]=$this->Model_Ayudas->GetPaises();
 		$data["muni"]=$this->Model_Ayudas->GetEstado(42);
         $data["empresa"]=$this->Model_Empresa->GetdatsEmpresa($IDEmpresa);
+            $data["perfiles"]=$this->Model_Perfiles->GetPerfiles($IDEmpresa,'1');
+
+
 		$this->load->view('assets'); 
         $this->load->view('base');
 		$this->load->view('Clientesp',$data);

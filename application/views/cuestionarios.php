@@ -471,3 +471,288 @@ $num="";
     </div>
   </div>
 </div>  
+
+<div class= 'accion-grupoC'>
+  <div class='dropdown-item'>
+    
+<div class="izimodal" id="msjaltac" data-title="Registro de Cuestionario Qval">
+    <div class="container">
+      <div class="row">
+        <div class="col-4 m-t-20">
+          <div class="form-group">
+            <label for="ncuestionario">Nombre Cuestionario</label>
+            <input type="text" class="form-control" id="ncuestionario" placeholder="">
+          </div>
+        </div>
+        <div class="col-4 m-t-20">
+          <div class="form-group">
+            <label for="ncuestionario">Grupo Emisor</label>
+            <select class="form-control" name="" id="emisor">
+              <option value="0">Selecciona..</option>
+              <?php if($perfiles!==false):
+              foreach ($perfiles as $key) {
+                ?>
+                <option value="<?= $key->IDGrupo?>-<?=$key->Tipo?>"><?= $key->Nombre."->".$key->Tipo?> </option>
+                <?php
+              }
+              ?>
+
+            <?php endif ?>
+          </select>
+        </div>
+      </div>
+      <div class="col-4 m-t-20">
+        <div class="form-group">
+          <label for="ncuestionario">Grupo Receptor</label>
+          <select class="form-control" name="" id="receptor">
+            <option value="0">Selecciona..</option>
+            <?php if($perfiles!==false):
+            foreach ($perfiles as $key) {
+              ?>
+              <option value="<?= $key->IDGrupo?>-<?=$key->Tipo?>"><?= $key->Nombre."->".$key->Tipo?></option>
+              <?php
+            }
+            ?>
+
+          <?php endif ?>
+        </select>
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="tbpreguntas">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col"></th>
+              <th scope="col">Pregunta</th>
+              <th scope="col">Puntos</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php if($preguntas!==false):
+            $i=1;
+            foreach ($preguntas as $value) {
+              ?>
+              <tr>
+                <td><?=$i?></td>
+                <td><input type="checkbox" name="preg" value="<?=$value->Nomenclatura?>"></td>
+                <td><?=$value->Pregunta?></td>
+                <td><?=$value->Peso?></td>
+              </tr>
+              <?php
+              $i++;
+            }
+            ?>
+          <?php endif ?>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="col-12 m-t-20 m-b-20">
+    <div class="row">
+      <div class="col-3">
+        <div class="slideThree">  
+          <input type="checkbox" value="None" id="checemail" name="check"  />
+          <label for="checemail"></label>
+        </div>
+
+      </div>
+      <div class="col-3">
+        <span>Disponible en Email</span>
+      </div>
+      <div class="col-3 " >
+        <div class="slideThree">  
+          <input type="checkbox" value="None" id="checwats" name="check"  />
+          <label for="checwats"></label>
+        </div>
+      </div>
+      <div class="col-3">
+        <span>Disponible en WatsApp</span>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 text-right m-t-20 m-b-20">
+    <button type="button" id="btnadd-grupo" class="btn btn-success">Agregar Pregunta</button>
+    <button type="button" class="btn btn-primary" onclick="help.addcuest('+')"  id="btn-cues">Guardar</button>
+    <button type="button" class="btn btn-danger" onclick="$('#msjaltac').iziModal('close')">Cancelar</button>
+  </div>
+
+  <div class="col-12">
+    <div class="alert alert-primary" role="alert">
+      <strong>Llena corectamente los datos solicitados</strong>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+<div class="izimodal" id="msjaltap" data-title="Registro de Preguntas Qval">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 m-t-20">
+        <div class="form-group">
+          <label for="pregunta">Pregunta</label>
+          <input type="email" class="form-control" id="pregunta" aria-describedby="emailHelp" placeholder="">
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="form-group">
+          <label for="">Forma de Pregunta</label>
+          <select name="" onchange="help.crp(this.value)" class="form-control" id="formpr">
+            <option value="0">Selecciona</option>
+            <option value="SI/NO">SI/NO</option>
+            <option value="SI/NO/NA">SI/NO/NA</option>
+            <option value="AB">ABIERTA</option>
+            <option value="DIAS">DIAS</option>
+            <option value="MESES">MESES</option>
+            <option value="HORAS">HORAS</option>
+            <option value="NUMERO">NÚMERO</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-12 rp">
+        <div class="form-group">
+          <label for="rp">Respuesta Positiva</label>
+          <div class="continp">
+            <select name="" class="form-control" id="rp"></select>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="form-group">
+          <label for="rp">Frecuencia</label>
+          <select name="" class="form-control" id="frecuencia">
+            <option value="0">Selecciona</option>
+            <option value="1V">Cada Visita</option>
+            <option value="1M">Cada Mes</option>
+            <option value="1B">Cada Dos Meses</option>
+            <option value="1T">Cada Tres Meses</option>
+            <option value="1S">Semestral</option>
+            <option value="115">Primeros 15 dias(1 a 15)</option>
+            <option value="215">Segundos 15 dias(16 a 30)</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="form-group">
+          <label for="puntaje">Puntaje</label>
+          <input type="number" class="form-control" id="puntaje">
+        </div>
+      </div>
+      <div class="col-12 text-right m-b-20">
+        <button type="button" class="btn btn-secondary" onclick="$('#msjlistpregp').iziModal('open')">Selecciona del Listado</button>
+        <button type="button" class="btn btn-primary" id="savepreg">Guardar</button>
+        <button type="button" class="btn btn-danger" onclick="$('#msjaltap').iziModal('close')">Cancelar</button>
+      </div>
+      <div class="col-12">
+        <div class="alert alert-primary" role="alert">
+          <strong>Llena corectamente los datos solicitados</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="izimodal" id="msjlistpregp" data-title="Listado de Preguntas Qval">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <form action="">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th></th>
+                <th>Pregunta</th>
+                <th>Forma</th>
+                <th>Respuesta</th>
+                <th>Puntos</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php
+              $i=1;
+              foreach ($preguntasqval as $key) {
+                ?>
+                <tr>
+                  <td><input type="radio" name="preg" value="<?= $key->IDPregunta;?>"></td>
+                  <td><?= $key->Pregunta;?></td>
+                  <td><?= $key->Forma;?></td>
+                  <td><?= $key->Respuesta;?></td>
+                  <td><?= $key->Puntos;?></td>
+                </tr>
+                <?php
+              }
+              ?>
+
+            </tbody>
+          </table>
+        </form>
+      </div>
+      <div class="col-12 text-right m-b-20">
+        <button type="button" class="btn btn-primary" id="gent-preg">Aceptar</button>
+        <button type="button" class="btn btn-danger" onclick="$('#msjlistpregp').iziModal('close')">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>  
+<div class="izimodal" id="mslistpr" data-title="Listado de Preguntas">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 ">
+        <div class="listprg">
+          <table class="table table-hover">
+          <thead class="thead-qval">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col"></th>
+              <th scope="col">Pregunta</th>
+              <th scope="col">Forma</th>
+              <th scope="col">Puntos</th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <?php if($preguntas!==false):
+            $i=1;
+            foreach ($preguntas as $value) {
+              ?>
+              <tr>
+                <td><?=$i?></td>
+                <td><input type="checkbox" name="preg" value="<?=$value->Nomenclatura?>"></td>
+                <td><?=$value->Pregunta?></td>
+                <td><?=$value->Forma?></td>
+                <td><?=$value->Peso?></td>
+              </tr>
+              <?php
+              $i++;
+            }
+            ?>
+          <?php endif ?>
+        </tbody>
+      </table>
+        </div>
+    </div>
+    <div class="col-12  text-right m-t-20 m-b-20">
+      <button type="button" class="btn btn-primary" id="add-cuesM">Aceptar</button>
+      <button type="button" class="btn btn-danger" onclick="$('#mslistpr').iziModal('close')">Cancelar</button>
+    </div>
+  </div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+  </div>  
+</div>

@@ -30,16 +30,16 @@ function Resultados (){
 		//if(cuestionario.Status == 0) /////////////each
 		
 		// console.log(tip);
-		help.senddata(tip,"resultados/MuestraCues", function(resp){
+		help.senddataa(tip,"resultados/MuestraCues", function(resp){
 			html+="<optgroup label='Desactivados'>"
 			$.each(resp.cuestionarios,function(index,cuestionario){
 		html+="<option value='"+cuestionario.IDCuestionario+"'>"+cuestionario.Nombre+"</option>";
 			})
 			html+="</optgroup>"
-			// $("#cuestion").html(html);
+			$("#cuestion").html(html);
 		})
 
-		help.senddata(tip1,"resultados/MuestraCues", function(resp){
+		help.senddataa(tip1,"resultados/MuestraCues", function(resp){
 			html+="<optgroup label='Activados'>"
 			$.each(resp.cuestionarios,function(index,cuestionario){
 				html+="<option value='"+cuestionario.IDCuestionario+"'>"+cuestionario.Nombre+"</option>";
@@ -51,7 +51,7 @@ function Resultados (){
 	}
 	that.CargaResumen=function(num){
 		var tip={"numC":num};
-		help.senddata(tip,"resultados/Resumen", function(resp){
+		help.senddataa(tip,"resultados/Resumen", function(resp){
 			$("#cvs-detalles").attr("href", "http://"+window.location.host+"/adminqval/resultados/detalles_cvs?num="+num);
 			$("#cvs-resumen").attr("href", "http://"+window.location.host+"/adminqval/resultados/resumen_cvs?num="+num);
 				$(".datos .nombre").text(resp.perfiles[0].Nombre)

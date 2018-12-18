@@ -43,6 +43,7 @@ $num="";
 									<thead class="thead-qval">
 										<tr>
 											<th scope="col">#</th>
+											<th scope="col">prueba de la llave primaria</th>
 											<th scope="col">Nombre</th>
 											<th scope="col">Apellidos</th>
 											<th scope="col">Usuario</th>
@@ -57,18 +58,34 @@ $num="";
 												?>
 												<tr>
 													<td><?=$i?></td>
+													<td><?=$key->IDUsuario?></td>
 													<td><?=$key->Nombre?></td>
 													<td><?=$key->Apellidos?></td>
 													<td>
-														<div class="btn-group" role="group"><button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Acciones</button>				<div class="dropdown-menu accion-funU" aria-labelledby="btnGroupDrop1">
+														<div class="btn-group" role="group"><button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Acciones</button>		<div class="dropdown-menu accion-funU" aria-labelledby="btnGroupDrop1">
 																<ul>
-																<li class="dropdown-item" lla="add-funU" llt="E" llc="<?= $key->IDUsuario?>"><i class="fa fa-list-ol" aria-hidden="true"></i> Asignar Acciones</li>
-																<li data-toggle="modal"  data-target="#add-tel"  class="dropdown-item" onclick="help.optionusr('get-tel',this.id)" id="<?= $key->IDUsuario?>"><i class="fa fa-phone" aria-hidden="true"></i> Telefonos</li><li lla="mod-funU" class="dropdown-item" onclick="help.optionusr('update',this.id)" llt="E" llc="<?= $key->IDUsuario?>"><i class="fa fa-wrench" aria-hidden="true"></i> Modificar</li>
-																<li lla="del-funU" class="dropdown-item" llt="E" llc="<?= $key->IDUsuario?>"><i class="fa fa-ban" aria-hidden="true"></i> Borrar</li>
-																<li  class="dropdown-item" onclick="help.optionusr('gen-qr',this.id)" id="I|<?= $key->Usuario?>"><i class="fa fa-phone" aria-hidden="true"></i> Código QR</li></ul></div></div></td>		
+																	<li class="dropdown-item" lla="add-funU" llt="E" llc="<?= $key->IDUsuario?>"><i class="fa fa-list-ol" aria-hidden="true"></i> Asignar Acciones
+																	</li>
+																	<li data-toggle="modal"  data-target="#add-tel"  class="dropdown-item" onclick="help.optionusr('get-tel',this.id)" id="<?= $key->IDUsuario?>">
+																		<i class="fa fa-phone" aria-hidden="true"></i> Telefonos
+																	</li>
+																	<li lla="mod-funU" class="dropdown-item"  llt="E" llc="<?= $key->IDUsuario?>">
+																		<i class="fa fa-wrench" aria-hidden="true"></i> Modificar
+																	</li>
+																	<li lla="del-funU" class="dropdown-item" llt="E" llc="<?= $key->IDUsuario?>">
+																		<i class="fa fa-ban" aria-hidden="true"></i> Borrar
+																	</li>
+																	<li  class="dropdown-item" onclick="help.optionusr('gen-qr',this.id)" id="I|<?= $key->Usuario?>">
+																		<i class="fa fa-phone" aria-hidden="true"></i> Código QR
+																	</li>
+																</ul>
+															</div>
+														</div>
+													</td>		
 		
-															</tr>
+												</tr>
 															<?php
+															$i += 1;
 														}	
 													}
 													?>
@@ -463,7 +480,7 @@ $num="";
 			Esperando datos...
 		</div>
 		       </div>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <a target="_blank" href="assets/plantillas/plantillasnuev/usuarios.csv"><label class="btn btn-primary bg-naranja" for="">Descargar Plantilla</label></a>
         <label  class="btn btn-primary bg-verde">Subir Archivo
         	<form id="frmchang" enctype="multipart/form-data" >
@@ -471,7 +488,7 @@ $num="";
 			</form>
         </label>
 
-        <label  class="btn btn-secondary" data-dismiss="modal">Cerrar</label>
+        <label  class="btn btn-secondary" data-dismiss="modal">Cancelar</label>
        </div>
        	</div>
       </div>

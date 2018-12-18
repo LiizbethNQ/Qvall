@@ -64,10 +64,27 @@
       </div>
     </div>
   </div>
+<!--  <div id="pie">
+<div id="pieunodf">pie uno</div>
+<div id="pietres">pie tres</div>
+</div> -->
+
+<!-- <div id="footer">
+<hr size="1" noshade="noshade" />
+<div class="copyright guest font-weight-bold "><span>&nbsp;&nbsp;&nbsp;&nbsp;Admyo Corporation</span><em> © 2018</em> </div>
+<div class="col text-center align-middle footer nav-link"><a href="https://twitter.com/infoadmyo"><i class="fa fa-twitter align-middle"aria-hidden="true"></i></a></div>
+<div class="col text-center align-middle footer nav-link"><a href="https://www.facebook.com/infoadmyo"><i class="fa fa-facebook align-middle" aria-hidden="true"></i></a></div>
+    
+<div class="col text-center align-middle"><span class="link" href="<?= base_URL()?>Condiciones">Términos y Condiciones</div>
+                  
+<div class="col text-center align-middle"><span class="link" href="<?= base_URL()?>Políticap">Política de privacidad</span></div>
+        
+<div class="col text-center align-middle"><span class="link" href="<?= base_URL()?>Políticac">Política de cookies</span></div> 
  
+</div> --> <!-- final del div footer -->
 
 <footer>
-<div class="container-fluid mobile-sub wsmenu-list footer float-right text2 m-t-30">
+<div class="container-fluid mobile-sub wsmenu-list footer float-right text2 m-t-40">
 
 <div class="row text2">
 

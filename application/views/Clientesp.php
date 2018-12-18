@@ -1,5 +1,12 @@
 	<script src="assets/js/appclie.js" ></script>
 
+
+<?php
+$num="";
+// var_dump($pais);
+
+?> 
+
 <div class="container m-t-30">
 	<div class="row">
 		<div class="card w-100">
@@ -52,11 +59,16 @@
 												<td><?=$cliente->Nombre?></td>
 												<td><?=$cliente->NombreComercial?></td>
 												<td>
-													<div class="btn-group" role="group"><button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Acciones</button>				<div class="dropdown-menu accion-funCl" aria-labelledby="btnGroupDrop1">
+													<div class="btn-group" role="group"><button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Acciones</button>			
+														<div class="dropdown-menu accion-funCl" aria-labelledby="btnGroupDrop1">
 															<ul>
 																
-																<li lla="mod-funC" class="dropdown-item" llt="E" llc="<?=$cliente->IDCliente?>"><i class="fa fa-wrench" aria-hidden="true"></i> Modificar Datos</li><li lla="del-funC" class="dropdown-item" llt="E" llc="<?=$cliente->IDCliente?>"><i class="fa fa-ban"  aria-hidden="true"></i> Borrar</li>
-																<li lla="qr-funC"  class="dropdown-item"  id="E|<?=$cliente->Usuario?>"><i class="fa fa-qrcode" aria-hidden="true"></i> Código QR</li></ul></div></div>
+																<li lla="mod-funC" class="dropdown-item" llt="E" llc="<?=$cliente->IDCliente?>">
+																	<i class="fa fa-wrench" aria-hidden="true"></i> Modificar Datos</li>
+																<li lla="del-funC" class="dropdown-item" llt="E" llc="<?=$cliente->IDCliente?>"><i class="fa fa-ban"  aria-hidden="true"></i> Borrar</li>
+																<li lla="qr-funC"  class="dropdown-item"  id="E|<?=$cliente->Usuario?>"><i class="fa fa-qrcode" aria-hidden="true"></i> Código QR</li></ul>
+														</div>
+													</div>
 
 												</td>
 											</tr>
@@ -133,23 +145,18 @@
 								<div class="input-group">
 									<span class="input-group-addon succes" id="pais"><i class="fa fa-globe" aria-hidden="true"></i></span>
 									<select  name="Pais" class="form-control" id="pais" lln="Pais">
-										<?php
-											foreach ($pais as $key) {
-												if($key->id==="42"){
-													?>
-												<option selected value="<?= $key->id?>"><?= $key->paisnombre?></option>
-												<?php
+										<?php if($Pais!==false):
+            foreach ($pais as $key) {
+              ?>
+              <option value="<?=$key->Pais?>">$key->Pais?></option>
+              <?php
+            }
+            ?>
 
-												}else
-												{
-													?>
-												<option value="<?= $key->id?>"><?= $key->paisnombre?></option>
-												<?php
-												}
-												
-											}
-										?>
-									</select>
+          <?php endif ?>
+			</select>
+              
+		
 								</div>
 							</div>
 						</div>
@@ -192,18 +199,16 @@
 								<div class="input-group">
 									<span class="input-group-addon succes" id="basic-addon2"><i class="fa fa-users" aria-hidden="true"></i></span>
 									<select required  name="Grupo" class="form-control" id="grupo" lln="Grupo">
-										<?php
-										if($grupos!=false){
+										<option value="0">Selecciona..</option>
+            <?php if($perfiles!==false):
+            foreach ($perfiles as $key) {
+              ?>
+              <option value="<?= $key->IDGrupo?>-<?=$key->Tipo?>"><?= $key->Nombre."->".$key->Tipo?></option>
+              <?php
+            }
+            ?>
 
-										
-											foreach ($grupos as $key) {
-												?>
-												<option value="<?= $key->IDGrupo?>"><?= $key->Nombre?></option>
-												<?php
-											}
-											}
-										?>
-
+          <?php endif ?>
 									</select>
 								</div>
 							</div>

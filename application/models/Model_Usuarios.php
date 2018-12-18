@@ -109,8 +109,8 @@ class Model_Usuarios extends CI_Model
 			return $sql->result()[0];
 		}
 	}
-	public function DatosUsuarious($num,$empresa){
-		$sql=$this->db->select("*")->where("Usuario='$num' and IDEmpresa='$empresa'")->get("usuario");
+	public function DatosUsuarious($num){
+		$sql=$this->db->select("*")->where("IDUsuario = $num")->get("usuario");
 		if($sql->num_rows===0){
 			return false;
 		}else{
@@ -127,7 +127,7 @@ class Model_Usuarios extends CI_Model
 
 	}
 	Public function delUsuario($num){
-		$sql=$this->db->where("IDUsuario='$num'")->delete("usuario");
+		$sql=$this->db->where("IDUsuario=$num")->delete("usuario");
 	}
 	public function addaccions($us,$fun){
 		$array=array("funciones"=>json_encode($fun));

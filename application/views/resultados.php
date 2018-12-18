@@ -9,8 +9,8 @@
               <div class="form-group">
                 <label for="cuestion">Cuestionarios</label>
                 <select name="cuestionario" id="cuestion" class="form-control">
-                  
-                 <!--  <?php
+                 <!--  
+                  <?php
               foreach ($cuestionarios as $key) {
            ?>
               <option value="<?=$key['IDCuestionario']?>"><?=$key['Nombre']?> </option>

@@ -15,6 +15,7 @@
 	<script src="assets/js/iziModal.min.js"></script>
 	<script src="assets/js/jquery.cookie.js"></script>
 	<script src="assets/js/help.js" ></script>
+    <script src="assets/js/appclie.js"></script>
 	<script src="assets/js/appresultados.js" ></script>
     <script src="assets/js/Chart.min.js" ></script>
 	<script src="assets/js/cleave.min.js"></script>

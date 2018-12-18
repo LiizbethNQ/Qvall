@@ -178,7 +178,22 @@ that.addcokie=function(key,tip){
 		}
 		return false;
 	}
-	that.senddata=function(obt,url,callback){
+	that.senddata=function(obt,url){
+		console.log(JSON.stringify(obt)+'----- DATOS QUE ENVIA AL SERVIDOR')
+		console.log(config.urldata+url)
+		$.post(config.urldata+url,{datos:JSON.stringify(obt)},function(respuesta){
+			// console.log(config.urldata+url + 'ESTA ES LA RUTA A LA QUE SE VA')
+			// console.log(JSON.stringify(respuesta)+'----RESPUESTA DEL SERVIDOR');
+			// console.log(respuesta.length+'LONGITUD DE RESPUESTA')
+			// if(respuesta== null)
+			//   location.reload();
+
+			// var datos=JSON.parse(respuesta);
+			// callback(datos);
+			// console.log(datos + "si esta");
+		})
+	} 
+	that.senddataa=function(obt,url,callback){
 		$.post(config.urldata+url,{datos:JSON.stringify(obt)},function(respuesta){
 			console.log(respuesta);
 			var datos=JSON.parse(respuesta);
@@ -263,7 +278,7 @@ that.addcokie=function(key,tip){
 		}
 		$(prin+" .alert").html("<strong>Procesando los datos</strong>")
 		obt={"Nombre":nombre,"wats":wats,"email":email,"emisor":emisor,"receptor":receptor,"empresa":empresa,"cuestionario":cues,"tp":mg,"num":that.getlocal('kyCues-mod')};
-		that.senddata(obt,"cuestionarios/addcues",function(respuesta){
+		that.senddataa(obt,"cuestionarios/addcues",function(respuesta){
 		location.reload();
 
 			if(respuesta.pass==1){
@@ -605,7 +620,7 @@ $(document).on("click","#add-grupo #btnadd-grupo",function(){
 		obt={"Nombre":nombre,"Tipo":tipo,"Empresa":empresa};
 		console.log(obt)
 location.reload();
-		help.senddata(obt,"admin/AddGrupo",function(respuesta)
+		help.senddataa(obt,"admin/AddGrupo",function(respuesta)
 
 	
 		{
@@ -633,7 +648,7 @@ $(document).on("click","#add-grupo #btnmod-grupo",function(){
 		obt={"Nombre":nombre,"Tipo":tipo,"num":sessionStorage.getItem("numgrup")};
 		location.reload();
 
-		help.senddata(obt,"Admin/ModGrupo",function(respuesta){
+		help.senddataa(obt,"Admin/ModGrupo",function(respuesta){
 			console.log(respuesta);
 					location.reload();
 
@@ -656,7 +671,7 @@ $(document).on("click","#add-grupo #btnmod-grupo",function(){
 $(document).on("click",".accion-grupoI .dropdown-item",function(){
 	if($(this).attr("lla")=="as"){
 		var obj={"Empresa":empresa}
-		help.senddata(obj,"cuestionarios/getcuestion",function(respuesta){
+		help.senddataa(obj,"cuestionarios/getcuestion",function(respuesta){
 
 			if(respuesta.Cuestionario==false){
 				$("#sncuest").iziModal("open");
@@ -667,7 +682,7 @@ $(document).on("click",".accion-grupoI .dropdown-item",function(){
 
 	}else if($(this).attr("lla")=="mod"){
 		obj={"num":$(this).attr("id")}
-		help.senddata(obj,"Admin/datgrupos",function(resp){
+		help.senddataa(obj,"Admin/datgrupos",function(resp){
 			sessionStorage.setItem("numgrup",resp.Perfildatos[0].IDGrupo);
 			$("#add-grupo input[type='radio']").removeAttr("checked")
 			$("#add-grupo #nombre").val(resp.Perfildatos[0].Nombre);
@@ -679,6 +694,7 @@ $(document).on("click",".accion-grupoI .dropdown-item",function(){
 
 		$("#borrargrupo").iziModal("open");
 		$("#borrargrupo .btn-danger").attr("id",$(this).attr("id"));
+
 
 		 
 	}
@@ -730,21 +746,20 @@ $(document).on("click","#savepreg",function(){
 	}else if(pun===""){
 		$("#msjaltap .alert").html("<strong>Error!</strong> Ingresa puntaje para una calificación de esta pregunta.").addClass("alert-danger").removeClass("alert-primary")
 	}else{
-		if($("#rp").length > 0 ){
-			respuesta=$("#rp").val()
-		}
+	
 		obj={
 			"pregunta":p,"forma":f,"frecuencia":fr,"puntos":pun,"respuesta":respuesta,"empresa":empresa
 		};
-		help.senddata(obj,"cuestionario/addPreg",function(resp){
+		location.reload();
+		help.senddataa(obj,"cuestionarios/addPreg",function(resp){
 			if(resp.pass==1){
-				$("#msjaltap").iziModal('destroy');
+				$("#msjaltap").modal('toggle');
 				
 				setTimeout(function(){
 					var obj={
 						"empresa":empresa
 					}
-					help.loadview("Preguntas",obj)},500);
+					help.loadview("preguntas",obj)},500);
 			}else{
 				$("#msjaltap .alert").html("<strong>Error!</strong> "+resp.Mensaje);
 			}
@@ -752,92 +767,90 @@ $(document).on("click","#savepreg",function(){
 		
 	}
 })
-// $(document).on("click","#modifpreg",function(){
-// 	$("#msjaltap .alert").html("Procesando los datos").addClass("alert-primary").removeClass("alert-danger")
-// 	var p=$("#msjaltap #pregunta").val();
-// 	var f=$("#msjaltap #formpr").val();
-// 	var r=$("#msjaltap #rp").val();
-// 	var fr=$("#msjaltap #frecuencia").val();
-// 	var pun=$("#msjaltap #puntaje").val();
-// 	var respuesta="";
-// 	if(p===""){
-// 		$("#msjaltap .alert").html("<strong>Error!</strong> Ingresa una pregunta.").addClass("alert-danger").removeClass("alert-primary")
-// 	}else if((f==="")||(f==="0")){
-// 		$("#msjaltap .alert").html("<strong>Error!</strong> Ingresa la forma de esta pregunta.").addClass("alert-danger").removeClass("alert-primary")
-// 	}else if((fr==="")||(fr==="0")){
-// 		$("#msjaltap .alert").html("<strong>Error!</strong> Ingresa una frecuencia con lo que aparecera ésta pregunta.").addClass("alert-danger").removeClass("alert-primary")
-// 	}else if(pun===""){
-// 		$("#msjaltap .alert").html("<strong>Error!</strong> Ingresa puntaje para una calificación de esta pregunta.").addClass("alert-danger").removeClass("alert-primary")
-// 	}else{
-// 		if($("#rp").length > 0 ){
-// 			respuesta=$("#rp").val()
-// 		}
-// 		obj={
-// 			"tip":"modDat","pregunta":p,"forma":f,"frecuencia":fr,"puntos":pun,"respuesta":respuesta,"num":help.getlocal("kyprd-mod")
-// 		};
-// 		help.senddata(obj,"cuestionario/oppreg",function(resp){
-// 			if(resp.pass==1){
-// 				$("#msjaltap").iziModal('destroy');
-				
-// 				setTimeout(function(){
-// 					var obj={
-// 						"empresa":empresa
-// 					}
-// 					help.loadview("Preguntas",obj)},500);
-// 			}else{
-// 				$("#msjaltap .alert").html("<strong>Error!</strong> "+resp.Mensaje);
-// 			}
-// 		})
-		
-		
-// 	}
-// })
-//-------------------------------------------------------------------
-
-
 $(document).on("click","#modifpreg",function(){
-	$("#msjmodp .alert").html("Procesando los datos").addClass("alert-primary").removeClass("alert-danger")
-	var p=$("#msjmodp #pregunta").val();
-	var f=$("#msjmodp #formpr").val();
-	var r=$("#msjmodp #rp").val();
-	var fr=$("#msjmodp #frecuencia").val();
-	var pun=$("#msjmodp #puntaje").val();
+	$("#msjaltap .alert").html("Procesando los datos").addClass("alert-primary").removeClass("alert-danger")
+	var p=$("#msjaltap #pregunta").val();
+	var f=$("#msjaltap #formpr").val();
+	var r=$("#msjaltap #rp").val();
+	var fr=$("#msjaltap #frecuencia").val();
+	var pun=$("#msjaltap #puntaje").val();
 	var respuesta="";
 	if(p===""){
-		$("#msjmodp .alert").html("<strong>Error!</strong> Ingresa una pregunta.").addClass("alert-danger").removeClass("alert-primary")
+		$("#msjaltap .alert").html("<strong>Error!</strong> Ingresa una pregunta.").addClass("alert-danger").removeClass("alert-primary")
 	}else if((f==="")||(f==="0")){
-		$("#msjmodp .alert").html("<strong>Error!</strong> Ingresa la forma de esta pregunta.").addClass("alert-danger").removeClass("alert-primary")
+		$("#msjaltap .alert").html("<strong>Error!</strong> Ingresa la forma de esta pregunta.").addClass("alert-danger").removeClass("alert-primary")
 	}else if((fr==="")||(fr==="0")){
-		$("#msjmodp .alert").html("<strong>Error!</strong> Ingresa una frecuencia con lo que aparecera ésta pregunta.").addClass("alert-danger").removeClass("alert-primary")
+		$("#msjaltap .alert").html("<strong>Error!</strong> Ingresa una frecuencia con lo que aparecera ésta pregunta.").addClass("alert-danger").removeClass("alert-primary")
 	}else if(pun===""){
-		$("#msjmodp .alert").html("<strong>Error!</strong> Ingresa puntaje para una calificación de esta pregunta.").addClass("alert-danger").removeClass("alert-primary")
+		$("#msjaltap .alert").html("<strong>Error!</strong> Ingresa puntaje para una calificación de esta pregunta.").addClass("alert-danger").removeClass("alert-primary")
 	}else{
-
-		if($("#rp").length > 0 ){
-			respuesta=$("#rp").val()
-		}
+		// if($("#rp").length > 0 ){
+		// 	respuesta=$("#rp").val()
+		// }
 		obj={
-			tip:"modDat","pregunta":p,"forma":f,"frecuencia":fr,"puntos":pun,"respuesta":respuesta,"num":help.getlocal("kyprd-mod")
+			"tip":"modDat","pregunta":p,"forma":f,"frecuencia":fr,"puntos":pun,"respuesta":respuesta,"num":help.addlocal("kyprd-mod")
+
 		};
-								location.reload();
-		help.senddata(obj,"cuestionarios/addPreg",function(resp)
-{
+		location.reload();
+		help.senddataa(obj,"cuestionarios/oppreg",function(resp){
 			if(resp.pass==1){
-				$("#msjmodp").iziModal('destroy');
+				$("#msjaltap").modal('toggle');
 				
 				setTimeout(function(){
 					var obj={
 						"empresa":empresa
 					}
-					help.loadview("Preguntas",obj)},500);
+					help.loadview("preguntas",obj)},500);
 			}else{
-				$("#msjmodp .alert").html("<strong>Error!</strong> "+resp.Mensaje);
+				$("#msjaltap .alert").html("<strong>Error!</strong> "+resp.Mensaje);
 			}
 		})
 		
 		
 	}
 })
+
+// $(document).on("click","#modifpreg",function(){
+// 	$("#msjmodp .alert").html("Procesando los datos").addClass("alert-primary").removeClass("alert-danger")
+// 	var p=$("#msjaltap#pregunta").val();
+// 	var f=$("#msjaltap #formpr").val();
+// 	var r=$("#msjaltap #rp").val();
+// 	var fr=$("#msjaltap #frecuencia").val();
+// 	var pun=$("#msjaltap #puntaje").val();
+// 	var respuesta="";
+// 	if(p===""){
+// 		$("#msjaltap.alert").html("<strong>Error!</strong> Ingresa una pregunta.").addClass("alert-danger").removeClass("alert-primary")
+// 	}else if((f==="")||(f==="0")){
+// 		$("#msjaltap.alert").html("<strong>Error!</strong> Ingresa la forma de esta pregunta.").addClass("alert-danger").removeClass("alert-primary")
+// 	}else if((fr==="")||(fr==="0")){
+// 		$("#msjaltap.alert").html("<strong>Error!</strong> Ingresa una frecuencia con lo que aparecera ésta pregunta.").addClass("alert-danger").removeClass("alert-primary")
+// 	}else if(pun===""){
+// 		$("#msjaltap .alert").html("<strong>Error!</strong> Ingresa puntaje para una calificación de esta pregunta.").addClass("alert-danger").removeClass("alert-primary")
+// 	}else{
+
+// 			}
+// 		obj={
+// 			tip:"modDat","pregunta":p,"forma":f,"frecuencia":fr,"puntos":pun,"respuesta":respuesta,"num":help.getlocal("kyprd-mod")
+// 		};
+// 								location.reload();
+// 		help.senddata(obj,"cuestionarios/addPreg",function(resp)
+// {
+// 			if(resp.pass==1){
+// 				$("#msjaltap").Modal('toggle');
+				
+// 				setTimeout(function(){
+// 					var obj={
+// 						"empresa":empresa
+// 					}
+// 					help.loadview("preguntas",obj)},500);
+// 			}else{
+// 				$("#msjmodp .alert").html("<strong>Error!</strong> "+resp.Mensaje);
+// 			}
+// 		})
+		
+		
+//  	}
+//  })
 $(document).on("click",".accion-grupoP .dropdown-item",function(){
 	 var num,tip;
 	  num=$(this).attr("id"),tip=$(this).attr("lla");
@@ -845,7 +858,7 @@ $(document).on("click",".accion-grupoP .dropdown-item",function(){
 		"num":num,
 		"tip":tip
 	}
-	help.senddata(obj,"cuestionarios/oppreg",function(resp){
+	help.senddataa(obj,"cuestionarios/oppreg",function(resp){
 		if(tip=="mod"){
 			var datos=resp.datos[0];
 			$("#msjaltap #pregunta").val(datos.Pregunta)
@@ -878,7 +891,7 @@ $(document).on("click","#msjlistpregp #gent-preg",function(){
 	var obj={"num":num,"tip":"dat"}
 									location.reload();
 
-	help.senddata(obj,"cuestionarios/oppregqval",function(resp){
+	help.senddataa(obj,"cuestionarios/oppregqval",function(resp){
 
 		$("#msjaltap #pregunta").val(resp.datos[0].Pregunta);
 		$("#msjaltap #formpr").val(resp.datos[0].Forma);
@@ -896,7 +909,7 @@ $(document).on('click','#add-cuesM',function(){
 		}
 	})
 	var obj={"num":help.getlocal("kyCues-mod"),"tip":"ModCues","cues":cues}
-	help.senddata(obj,"cuestionarios/OprCues",function(resp){
+	help.senddataa(obj,"cuestionarios/OprCues",function(resp){
 		$("#mslistpr").modal('close');
 		setTimeout(function(){
 			var obj={
@@ -913,22 +926,31 @@ $(document).on("click","li[lla='add-funU']",function(){
 	$("#add-funct").modal('toggle');
 });
 $(document).on("click","li[lla='del-funU']",function(){
-	$("#msj-conf #btn-succes").attr("onclick","Usuarios.optionusr('Del'"+$(this).attr("llc")+"')")
+		$("#msj-conf #btn-primary").attr("onclick","help.optionusr('Del',"+$(this).attr("llc")+")")
+
+
+	// $("#msj-conf #btn-primary").attr("onclick","Usuarios.optionuser('Del' ,"+$(this).attr("llc")+")")
+	// obt={"num":$(this).attr("llc"),"tip":"Dat-us"}
 	$("#msj-conf").modal('toggle');
+
 })
+
 $(document).on('click',"li[lla='mod-funU']",function(){
 	var nunm=$(this).attr("llc");
+	// $("#add-usuario").modal('toggle');
 	obt={"num":$(this).attr("llc"),"tip":"Dat-us"}
-	help.senddata(obt,"Usuarios/optionuser",function(resp){
-		console.log(resp)
-					var datos=resp.datos[0];
 
-		$("#add-usuario input[lln='Nombre']").val(resp.datosU[0].Nombre)
-		$("#add-usuario input[lln='Apellidos']").val(resp.datosU[0].Apellidos)
-		$("#add-usuario input[lln='Usuario']").val(resp.datosU[0].Usuario)
-		$("#add-usuario input[lln='Puesto']").val(resp.datosU[0].Puesto)
-		$("#add-usuario input[lln='Email']").val(resp.datosU[0].Correo)
-		$("#add-usuario select[lln='Grupo']").val(resp.datosU[0].IDConfig)
+	console.log(JSON.stringify(obt)+'----------- SI ESTA EL OBJETO ')
+	help.senddataa(obt,"Usuarios/optionuser",function(resp){
+		console.log(JSON.stringify(resp)+'ESTA ES LA RESPUESTA QUE MANDA DE LA CONSULTA')
+		// var datos=resp.datos;
+		$("#add-usuario input[lln='Nombre']").val(resp.datosU.Nombre)
+		$("#add-usuario input[lln='Apellidos']").val(resp.datosU.Apellidos)
+		$("#add-usuario input[lln='Usuario']").val(resp.datosU.Usuario)
+		$("#add-usuario input[lln='Puesto']").val(resp.datosU.Puesto)
+		$("#add-usuario input[lln='Email']").val(resp.datosU.Correo)
+		$("#add-usuario select[lln='Grupo']").val(resp.datosU.IDConfig)
+
 		$("#add-usuario #btnadd-grupo").attr("onclick","help.optionusr('update','"+nunm+"')")
 		$("#add-usuario").modal('toggle');
 	})
@@ -942,7 +964,7 @@ $(document).on("click","#carga .pagination  .page-item a",function(){
 //---------------------Exporta JSON/Grupos-------------------------------->
 $(document).on("click","#exporjsongrup",function(){
 	var tip={"num":empresa};
-	help.senddata(tip,"admin/JSon_export", function(resp){
+	help.senddataa(tip,"admin/JSon_export", function(resp){
 		$("#exporjson .modal-body .card-body").html(JSON.stringify(resp));
 		$("#exporjson").modal("show");
 		return false;
@@ -953,7 +975,7 @@ $(document).on("click","#exporjsongrup",function(){
 
 $(document).on("click","#exporjsonus",function(){
 	var tip={"num":empresa};
-	help.senddata(tip,"Usuarios/JSon_export", function(resp){
+	help.senddataa(tip,"Usuarios/JSon_export", function(resp){
 		$("#exporjson .modal-body .card-body").html(JSON.stringify(resp));
 		$("#exporjson").modal("show");
 		return false;
@@ -983,7 +1005,7 @@ $(document).on("click","#btn-login", function(){
  tip={"user":$("#user").val(),"pas":$("#pas").val()};
 	console.log(JSON.stringify(tip)+"---------")
 
-	help.senddata(tip,"admin/login", function(resp){
+	help.senddataa(tip,"admin/login", function(resp){
 		console.log(resp);
 		
 		if(resp.pass===0){
@@ -1008,7 +1030,7 @@ $(document).on("click","#btn-rec", function(){
 	console.log(JSON.stringify(tp)+"---------")
 
 	
-		help.senddata(tp,"admin/rec", function(resp){
+		help.senddataa(tp,"admin/rec", function(resp){
 		console.log(resp);
 		
 		if(resp.pass===0){
