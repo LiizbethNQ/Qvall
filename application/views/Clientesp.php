@@ -67,8 +67,7 @@ $num="";
 																	<i class="fa fa-wrench" aria-hidden="true"></i> Modificar Datos</li>
 																<li lla="del-funC" class="dropdown-item" llt="E" llc="<?=$cliente->IDCliente?>"><i class="fa fa-ban"  aria-hidden="true"></i> Borrar</li>
 																<li lla="qr-funC"  class="dropdown-item"  id="E|<?=$cliente->Usuario?>"><i class="fa fa-qrcode" aria-hidden="true"></i> Código QR</li></ul>
-														</div>
-													</div>
+														</div></div>
 
 												</td>
 											</tr>
@@ -145,10 +144,10 @@ $num="";
 								<div class="input-group">
 									<span class="input-group-addon succes" id="pais"><i class="fa fa-globe" aria-hidden="true"></i></span>
 									<select  name="Pais" class="form-control" id="pais" lln="Pais">
-										<?php if($Pais!==false):
+										<?php if($pais!==false):
             foreach ($pais as $key) {
               ?>
-              <option value="<?=$key->Pais?>">$key->Pais?></option>
+              <option value="<?=$key->id?>"><?= $key->paisnombre?></option>
               <?php
             }
             ?>

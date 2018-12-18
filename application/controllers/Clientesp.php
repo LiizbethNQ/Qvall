@@ -52,8 +52,8 @@ class Clientesp extends CI_Controller
 		
 		$data["listclie"] = $this->Model_Clientes->total_paginados($IDEmpresa,$config['per_page'],$start_index,1); 
 		$data["links"]=$this->pagination->create_links();
-		$data2["grupos"]=$this->Model_Perfiles->GetPerfilSET($IDEmpresa,"E",1);
-		$data2["pais"]=$this->Model_Ayudas->GetPaises();
+		$data["grupos"]=$this->Model_Perfiles->GetPerfilSET($IDEmpresa,"E",1);
+		$data["pais"]=$this->Model_Ayudas->GetPaises();
 		$data["muni"]=$this->Model_Ayudas->GetEstado(42);
         $data["empresa"]=$this->Model_Empresa->GetdatsEmpresa($IDEmpresa);
             $data["perfiles"]=$this->Model_Perfiles->GetPerfiles($IDEmpresa,'1');

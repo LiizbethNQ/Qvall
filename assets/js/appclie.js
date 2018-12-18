@@ -9,7 +9,7 @@ function Clientes(){
 	that.estados=function(pais,div){
 		tip={"pais":pais}
 		var html="<option value=''>Selecciona</option>";
-		help.senddata(tip,"clientes/estados",function(data){
+		help.senddataa(tip,"Clientesp/estados",function(data){
 			console.log(data);
 			$.each(data.pais,function(index,estado){
 				html+="<option value='"+estado.id+"'>"+estado.estadonombre+"</option>";
@@ -24,6 +24,7 @@ function Clientes(){
 var cliente=new Clientes;
 $(document).on('change',"#Add-cliente #pais",function(){
 		cliente.estados($(this).val(),"#Add-cliente #estados");
+
 })
 // var cleave = new Cleave('#Add-cliente .tel', {
 //     phone: true,
@@ -63,7 +64,7 @@ $(document).on("click","button[llc='buscar']",function(){
 })
 $(document).on("click",".accion-funCl .dropdown-item",function(){
 	var tip={};
-	console.log('si entra')
+	
 	switch($(this).attr("lla")){
 		case "mod-funC":
 			tip["numc"]=$(this).attr("llc");
@@ -76,7 +77,7 @@ $(document).on("click",".accion-funCl .dropdown-item",function(){
 					$("#Add-cliente input[name='RZ']").val(datos.Nombre);
 					$("#Add-cliente input[name='NC']").val(datos.NombreComercial);
 					$("#Add-cliente input[name='Direccion']").val(datos.Direccion);
-					$("#Add-cliente select[name='Estado']").val(datos.EEstado);
+					$("#Add-cliente select[name='Estado']").val(datos.Estado);
 					$("#Add-cliente select[name='Grupo']").val(datos.IDConfig);
 					$("#Add-cliente input[name='Municipio']").val(datos.Municipio);
 					$("#Add-cliente input[name='RFC']").val(datos.RFC);
