@@ -27,7 +27,7 @@
 </div>
 <nav class="menu-pc div-invisible-sm wsmenu clearfix  margin-top-20">
 				
-				<div class="col-9 text-right float-right wsmenulist">
+				<div class="col-9 text-right float-right wsmenulist ">
 					<ul class="mobile-sub wsmenu-list float-right">
 <!----------------------------Home----------------------------------------->
 						
@@ -41,7 +41,8 @@
 					   <li><a href="<?= base_URL()?>Usuarios">Usuarios</a>
 				       </li>		
 <!----------------------------Clientes/Proveedores----------------------------------------->
-					   <li><a href="<?= base_URL()?>Clientesp">Clientes/Proveedores</a>
+					   <li><a href="<?= base_URL()?>Clientesp">Clientes/ Proveedores</a>
+					   	
 				       </li>		
 					   				   
 <!----------------------------Cuestionarios----------------------------------------->
@@ -73,7 +74,7 @@
 
 <!----------------------------Admyo----------------------------------------->
 	
-					   <li><a href="http://admyo.com">Admyo</a>
+					   <li><a href="http://admyo.com" target=”_blank” >Admyo</a>
 							
 				       </li>
 				   </ul>

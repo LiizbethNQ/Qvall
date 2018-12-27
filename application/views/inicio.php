@@ -194,7 +194,8 @@ var_dump($empresa);
 											<div class="col-12">
 											<div class="form-group">
 												<label for="">Descripción de la Empresa</label>
-												<textarea name="descripcion" class="form-control" col="30" rows="10" value=""> </textarea>
+												<textarea name="descripcion" class="form-control" col="30" rows="10"><?=$empresa->Descripcion ?></textarea>
+
 												
 											</div>
 										</div>
@@ -239,7 +240,7 @@ var_dump($empresa);
 										<div class="col-6 text2">
 											<div class="form-group">
 												<label for="">Código Postal</label>
-												<input name="cp" type="text" value="<?= $empresa->CP ?>"  class="form-control">
+												<input name="cp" type="number" value="<?= $empresa->CP ?>"  class="form-control">
 											</div>
 										</div>
 										<div class="col-6">
@@ -271,7 +272,7 @@ var_dump($empresa);
 										<div class="col-6 text2">
 											<div class="form-group">
 												<label for="">Telefono</label>
-												<input name="tel" type="text" value="<?= $empresa->Telefono ?>" class="form-control">
+												<input name="tel" type="number" value="<?= $empresa->Telefono ?>" class="form-control">
 											</div>
 										</div>
 

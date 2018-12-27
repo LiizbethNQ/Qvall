@@ -222,22 +222,21 @@ class Admin extends CI_Controller
     }
 
   //function para exportar en JSON
-    public function JSon_export(){
-      $datos=json_decode($_POST["datos"]);
-      $array=$this->Model_Perfiles->GetPerfiles($datos->num,1);
-      $datos=[];
-      foreach ($array as $dato) {
-        if($dato->Tipo==="I"){
-          $tipo="INTERNO";
-        }else{
-          $tipo="EXTERNO";
+   public function JSon_export(){
+        $datos=json_decode($_POST["datos"]);
+        $array=$this->Model_Perfiles->GetPerfiles($datos->num,1);
+        $datos=[];
+        foreach ($array as $dato) {
+            if($dato->Tipo==="I"){
+                $tipo="INTERNO";
+            }else{
+                $tipo="EXTERNO";
+            }
+            array_push($datos,array("Nombre"=>$dato->Nombre,"Tipo"=>$tipo));
         }
-        array_push($datos,array("Nombre"=>$dato->Nombre,"Tipo"=>$tipo));
-      }
-      $titulos=array("Nombre","Tipo");
-      $data["Grupos"]=$datos;
+        $titulos=array("Nombre","Tipo");
+        $data["GruposQval"]=$datos;
     }
-
 //----------------------------------login--------------------------->
     public function login(){ 
         $datos=json_decode($_POST["datos"]);

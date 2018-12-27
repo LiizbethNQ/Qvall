@@ -1798,7 +1798,8 @@ a:hover {
   border-color: #005d8f !important;
   font-weight: bold;
   border-style: solid;
-  cursor: pointer; }
+  cursor: pointer;
+  white-space: center; }
 
 .btn-success {
   background: #f7ac43 !important;
@@ -2129,3 +2130,14 @@ html, body {
 @media (max-width: 480px) {
   card-body1 {
     width: 100%; } }
+
+.results tr[visible='false'],
+.no-result {
+  display: none; }
+
+.results tr[visible='true'] {
+  display: table-row; }
+
+.counter {
+  padding: 8px;
+  color: #ccc; }

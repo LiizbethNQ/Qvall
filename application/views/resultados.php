@@ -136,7 +136,7 @@
                       </table>
                     </div>
                     <div class="col-12">
-                       <a  href="<?= base_URL(); ?>/resultados/detalles_cvs?num=9" target="_blank" id="cvs-detalles"  class="btn btn-primary bg-naranja">Descargar Detalle(CVS)</a>
+                       <a  href="<?= base_URL(); ?>/resultados/detalles_cvs?num=?" target="_blank" id="cvs-detalles"  class="btn btn-primary bg-naranja">Descargar Detalle(CVS)</a>
                     </div>
                   </div>
                   

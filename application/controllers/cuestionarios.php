@@ -131,7 +131,7 @@ class Cuestionarios extends CI_Controller
     $datos=json_decode($_POST["datos"]);
     switch ($datos->tip) {
       case 'mod':
-        $data['Mensaje']=$this->Model_Cuestionarios->DatConf($datos->num);
+        $data['Mensaje']=$this->Model_Cuestionarios->DatConf($datos->num,1);
         break;
       case 'asigpr':
         $data["Mensaje"]=$this->Model_Cuestionarios->Dcuestionario($datos->num);

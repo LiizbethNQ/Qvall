@@ -13,11 +13,14 @@ $num="";
 							<div class="col-12 text-rigth m-b-20">
 
 								<!---------------Buscador------------------->
-								<div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups" ng-controller="listadoCtrl">
-                                  <div class="input-group">
-                                    <input type="text" placeholder="  Usuario" name="caja_busqueda" id="caja_busqueda">
-                                    <button class="btn btn-primary bg-naranja" ><i class="fa fa-search" aria-hidden="true"></i></button>
-                                  </div>
+								 <div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups" ng-controller="listadoCtrl">
+                <div class="input-group" id="content-search">
+
+                <input type="text" class="search form-control" placeholder=" Usuario">
+                <button id="search-btn" class="btn btn-primary bg-naranja" ><i class="fa fa-search"></i></button>
+                </div>
+            <span class="counter pull-right"></span>
+       
             
                                  <div id="datos">
                   
@@ -27,11 +30,11 @@ $num="";
 
 									<div class="btn-group" role="group" aria-label="First group">
 										<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add-usuario"><i class="fa fa-user-plus" aria-hidden="true"></i> Alta</button>
-										<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#altaexpres"><i class="fa fa-address-book-o" aria-hidden="true"></i> Alta exprés</button>
+										<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#altaexpres"><i class="fa fa-exchange-alt"></i> Cargar Archivo</button>
 										<div class="btn-group" role="group"> </div>
                                         <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-file-alt"></i></i> Exportar</button>    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                                       <a class="dropdown-item" href="<?= base_URL() ?>/admin/cvs_export?num=<?=$num ?>">CVS</a>
-                                        <!-- <a class="dropdown-item" href="<?= base_URL() ?>/admin/JSon_export?num=<?=$num ?>">JSON</a>-->
+                                       	<a class="dropdown-item" href="<?= base_URL() ?>/usuarios/cvs_export?num=?>">CVS</a>
+	<a class="dropdown-item" id="exporjsonus">JSON</a> 
                                      </div>
 									</div>
 								</div>
@@ -39,16 +42,18 @@ $num="";
 							<!----------------------------section button--------------------------------->
 
 							<div class="col-12">
-								<table class="table table-hover">
+            <table class="table table-hover table-bordered results">
 									<thead class="thead-qval">
 										<tr>
 											<th scope="col">#</th>
-											<th scope="col">prueba de la llave primaria</th>
 											<th scope="col">Nombre</th>
 											<th scope="col">Apellidos</th>
-											<th scope="col">Usuario</th>
+											<th scope="col">Acciones</th>
 											<th scope="col"></th>
 										</tr>
+										<tr class="warning no-result">
+                                           <td colspan="12"><i class="fas fa-exclamation-circle"></i> No se encuentran resultdos...</td>
+                                        </tr>
 									</thead>
 									<tbody>
 										<?php 
@@ -58,7 +63,6 @@ $num="";
 												?>
 												<tr>
 													<td><?=$i?></td>
-													<td><?=$key->IDUsuario?></td>
 													<td><?=$key->Nombre?></td>
 													<td><?=$key->Apellidos?></td>
 													<td>
@@ -433,10 +437,10 @@ $num="";
         <!----Footer de la ventana----------->
                   <a class="btn btn-info bg-naranja" href="<?= base_URL() ?>/admin/cvs_export?num=<?=$num ?>">Descargar CSV</a> 
 
-                 <label  class="btn btn-info bg-verde">Subir Archivo
-          <form id="frmchang" enctype="multipart/form-data">
-        <input type="file" style="display: none;" name="usuexpres" accept=".csv" id="altausexpfiel">
-      </form>
+                 <label  class="btn btn-success">Subir Archivo
+        	<form id="frmchang" enctype="multipart/form-data" >
+			 	<input type="file" style="display: none;" name="usuexpres" accept=".csv" id="altausexpfiel">
+			</form>
         </label>
                  <label class="btn btn-info bg-gris" data-dismiss="modal">Cancelar</label>  
 
@@ -481,7 +485,7 @@ $num="";
 		</div>
 		       </div>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <a target="_blank" href="assets/plantillas/plantillasnuev/usuarios.csv"><label class="btn btn-primary bg-naranja" for="">Descargar Plantilla</label></a>
+        <a target="_blank"  href="<?= base_URL() ?>/usuarios/cvs_export?>"><label class="btn btn-primary bg-naranja" for="">Descargar Plantilla</label></a>
         <label  class="btn btn-primary bg-verde">Subir Archivo
         	<form id="frmchang" enctype="multipart/form-data" >
 			 	<input type="file" style="display: none;" name="usuexpres" accept=".csv" id="altausexpfiel">
@@ -494,4 +498,23 @@ $num="";
       </div>
     </div>
   </div>
+</div>
+<div class="modal" id="exporjson" tabindex="-1" role="dialog">
+	 <div class="modal-dialog" role="document">
+	 	 <div class="modal-content">
+		 	 	<div class="modal-header">
+		        <h5 class="modal-title">Usuarios Qval</h5>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      <div class="modal-body">
+		        <div class="card">
+				  <div class="card-body">
+				    This is some text within a card body.
+				  </div>
+				</div>
+		      </div>
+	 	 </div>
+	 </div>
 </div>

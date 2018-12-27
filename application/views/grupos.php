@@ -73,11 +73,15 @@ if($perfiles!=false){
             <div class="col-12 text-rigth m-b-20">
 
 <!------------------------------BUSCADOR----------------------------------------------------------------->
-              <div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups" ng-controller="listadoCtrl">
-                <div class="input-group">
-                  <input type="text" placeholder="  Grupo ABC" name="caja_busqueda" id="caja_busqueda">
-                  <button class="btn btn-primary bg-naranja" ><i class="fa fa-search" aria-hidden="true"></i></button>
+         
+                <div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups" ng-controller="listadoCtrl">
+                <div class="input-group" id="content-search">
+
+                <input type="text" class="search form-control" placeholder=" Grupo ABC">
+                <button id="search-btn" class="btn btn-primary bg-naranja" ><i class="fa fa-search"></i></button>
                 </div>
+            <span class="counter pull-right"></span>
+            
             
                 <div id="datos">
                   
@@ -103,7 +107,7 @@ if($perfiles!=false){
                                 <div class="btn-group" role="group"> </div>
                     <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-file-alt"></i></i> Exportar</button>    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
                       <a class="dropdown-item" href="<?= base_URL() ?>/admin/cvs_export?num=<?=$num ?>">CVS</a>
-                         <!-- <a class="dropdown-item" href="<?= base_URL() ?>/admin/JSon_export?num=<?=$num ?>">JSON</a -->
+                      <a class="dropdown-item" id="exporjsongrup">JSON</a>
 
                     </div>
                 </div>
@@ -132,25 +136,32 @@ if($perfiles!=false){
                   <div class="container-fluid">
                     <div class="row">
                       <div class="col-12 m-t-20">
-                        <table class="table table-hover">
-                          <thead class="thead-qval">
-                            <tr>
-                              <th scope="col">#</th>
-                              <th scope="col">Nombre</th>
-                              <th scope="col">Tipo</th>
-                              <th scope="col">Acciones</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                              <?php
+                        
+              
+            <table class="table table-hover table-bordered results">
+                <thead class="thead-qval">
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Tipo</th>
+                    <th scope="col">Acciones</th>
+                  </tr>
+                  <tr class="warning no-result">
+                  <td colspan="12"><i class="fas fa-exclamation-circle"></i> No se encuentran resultdos...</td>
+                  </tr>
+                </thead>
+              <tbody>
+                <?php
                             if($internos){
                               echo $internos; 
                             }
                             
                             ?>
-                   </tbody>
-                       
-                        </table>
+              </tbody>
+            </table>
+            <!-- fin de tabla -->
+
+
                       </div>
                     </div>
                   </div>
@@ -159,24 +170,32 @@ if($perfiles!=false){
                   <div class="container-fluid">
                     <div class="row">
                       <div class="col-12 m-t-20">
-                        <table class="table table-hover">
-                          <thead class="thead-qval">
-                            <tr>
-                              <th scope="col">#</th>
-                              <th scope="col">Nombre</th>
-                              <th scope="col">Tipo</th>
-                              <th scope="col">Acciones</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <?php
+                       
+                        <table class="table table-hover table-bordered results">
+                <thead class="thead-qval">
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Tipo</th>
+                    <th scope="col">Acciones</th>
+                  </tr>
+                  <tr class="warning no-result">
+                  <td colspan="4"><i class="fa fa-warning"></i> No result</td>
+                  </tr>
+                </thead>
+              <tbody>
+                <?php
                             if($externos){
                               echo $externos; 
                             }
                             
                             ?>
-                          </tbody>
-                        </table>
+              </tbody>
+            </table>
+
+
+
+
                       </div>
                     </div>
                   </div>
@@ -308,7 +327,7 @@ if($perfiles!=false){
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
         <!----Footer de la ventana----------->
-                  <a class="btn btn-info bg-naranja" href="<?= base_URL() ?>/admin/cvs_export?num=<?=$num ?>">Descargar CSV</a> 
+                  <a class="btn btn-info bg-naranja" href="<?= base_URL() ?>/admin/cvs_export?num=?>">Descargar CSV</a> 
 
                  <label  class="btn btn-info bg-verde">Subir Archivo
           <form id="frmchang" enctype="multipart/form-data">

@@ -30,7 +30,7 @@ $(document).on('change',"#Add-cliente #pais",function(){
 //     phone: true,
 //     phoneRegionCode: 'MX'
 // });
-$(document).on('click','div.btn-primary #btnadd-clie',function(event){
+$(document).on('click','#btnadd-clie',function(event){
 	var form=$("#formclie");
 	var url=form.attr("url");
 	var alert=$(".alert.alert-info");
@@ -114,7 +114,7 @@ $(document).on('hide.bs.modal','#Add-cliente', function (e) {
 });
 $(document).on("click","#exporjsonclie",function(){
 	var tip={"num":empresa};
-	help.senddata(tip,"clientes/JSon_export", function(resp){
+	help.senddataa(tip,"Clientesp/JSon_export", function(resp){
 		$("#exporjson .modal-body .card-body").html(JSON.stringify(resp));
 		$("#exporjson").modal("show");
 		return false;

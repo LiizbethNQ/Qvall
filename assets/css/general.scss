@@ -400,7 +400,7 @@ li{
     position: relative;
     content: "|";
     line-height: 16px;
-    font-size: 24px;
+    font-size: 15px;
     top: 3px;
   }
 .wsmenu-list li div:hover:before,
@@ -1456,6 +1456,8 @@ background:$colorazul!important;
     font-weight: bold;
     border-style: solid;
     cursor: pointer;
+        white-space: center;
+
 
 }
 .bg-rojo{
@@ -1875,3 +1877,19 @@ max-height: 70vh;
 .link {
     cursor: pointer;
 }
+.results tr[visible='false'],
+.no-result{
+  display:none;
+}
+
+.results tr[visible='true']{
+  display:table-row;
+}
+
+.counter{
+  padding:8px; 
+  color:#ccc;
+}
+
+
+

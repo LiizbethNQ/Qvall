@@ -196,7 +196,6 @@ class Grupos extends CI_Controller
     }
   //function para exportar en JSON
     public function JSon_export(){
-      $datos=json_decode($_POST["datos"]);
       $array=$this->Model_Perfiles->GetPerfiles($datos->num,1);
       $datos=[];
       foreach ($array as $dato) {

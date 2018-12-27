@@ -331,10 +331,10 @@ that.addcokie=function(key,tip){
 				var num=$(this).attr("id");
 				that.addlocal("kyCues-mod",num);
 				obj={"num":num,"tip":tip}
-				that.senddata(obj,"cuestionarios/OprCues",function(respuesta){
+				that.senddataa(obj,"cuestionarios/OprCues",function(respuesta){
 					var datos=respuesta.Mensaje[0];
 					if(tip=="asigpr"){
-						var cues=datos.Cuestionario.split(",");
+						var cues=datos.Cuestionarios.split(",");
 						$("#msjlistpregp .table tbody input[type='checkbox']").each(function(index){
 							for(preg in cues){
 								if($(this).val()===cues[preg]){
@@ -436,12 +436,13 @@ that.addcokie=function(key,tip){
 					break;
 
 			}
-			that.senddata(ti,"Usuarios/optionuser",function(resp){
+			that.senddataa(ti,"Usuarios/optionuser",function(resp){
 				if(opt==="add"){
 					$("#add-usuario").modal("toggle");
 					setTimeout(function(){
 						that.loadusuarios();
 					},1000)
+
 
 				}else if(opt==="get-tel"){
 					var t=""
@@ -533,6 +534,7 @@ that.addcokie=function(key,tip){
 			$("#mun-us.item-menu").addClass("active");
 			$("#mun-us.item-menu").find(".sub-menu").fadeIn(1000);
 			var obj={"empresa":empresa}
+			location.reload();
 			that.loadview("usuarios",obj);
 		}else{
 			help.msjerror("No tiene permisos para esta accion, contacte al administrador.");
@@ -544,13 +546,15 @@ that.addcokie=function(key,tip){
 	that.loadclientes=function(){
 		var funt=JSON.parse(help.getcokie("datusuario"));
 		var funct=JSON.parse(funt.Mensaje[0].funciones);
+				console.log(funct[3]);
+
 		if(funct[3]==="1"){
 			$(".active .sub-menu").hide("slow")
 			$(".item-menu").removeClass("active");
 			$("#mun-clie.item-menu").addClass("active");
 			$("#mun-clie.item-menu").find(".sub-menu").fadeIn(1000);
 			var tp={"empresa":empresa}
-			that.loadview("clientes",tp);
+			that.loadview("Clientesp",tp);
 		}else{
 			help.msjerror("No tiene permisos para esta accion, contacte al administrador.");
 		}
@@ -1174,10 +1178,36 @@ $(document).on("click","#btn-upclave",function(){
 		}
 		})
 })
+
 //-------------------------------------------------------------------------------------->
 
 $(function(){
 	help.datsempresa();
 })
 
+$(document).on("click","#search-btn",function(){
 
+    var searchTerm = $(".search").val();
+    var listItem = $('.results tbody').children('tr');
+    var searchSplit = searchTerm.replace(/ /g, "'):containsi('")
+    
+  $.extend($.expr[':'], {'containsi': function(elem, i, match, array){
+        return (elem.textContent || elem.innerText || '').toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
+    }
+  });
+    
+  $(".results tbody tr").not(":containsi('" + searchSplit + "')").each(function(e){
+    $(this).attr('visible','false');
+  });
+
+  $(".results tbody tr:containsi('" + searchSplit + "')").each(function(e){
+    $(this).attr('visible','true');
+  });
+
+  var jobCount = $('.results tbody tr[visible="true"]').length;
+  //   $('.counter').text(jobCount + ' item');
+
+  if(jobCount == '0') {$('.no-result').show();}
+    else {$('.no-result').hide();}
+		  // });		
+})

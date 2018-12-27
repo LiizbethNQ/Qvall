@@ -74,11 +74,11 @@ $this->load->view('usuarios',$data);
 				break;
 			case "update":
 			
-				$this->Model_Usuarios->UpdateUs($datos->usuario,$datos->data->Nombre,$datos->data->Apellidos,$datos->data->Usuario,$datos->data->Puesto,$datos->data->Email,$datos->Grupo,1);
-				$data["pass"]=1;
+			$this->Model_Usuarios->UpdateUs($datos->usuario,$datos->data->Nombre,$datos->data->Apellidos,$datos->data->Usuario,$datos->data->Puesto,$datos->data->Email,$datos->Grupo);
+			$data["pass"]=1;
 				break;
 			case "Del":
-				// $data["pass"]=1;
+			$data["pass"]=1;
 				$this->Model_Usuarios->delUsuario($datos->usuario);
 				break;
 		}

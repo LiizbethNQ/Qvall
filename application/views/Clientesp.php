@@ -16,22 +16,25 @@ $num="";
 						<div class="col-12 text-rigth m-b-20">
 
 							<!---->
-							<div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
-                <div class="input-group">
-                  <input type="text" class="form-control" placeholder="Clientes/Proveedores" aria-label="Input group example" aria-describedby="btnGroupAddon2">
-                  <button class="btn btn-primary bg-naranja" >Buscar</button>
+								<div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups" ng-controller="listadoCtrl">
+                <div class="input-group" id="content-search">
+
+                <input type="text" class="search form-control" placeholder=" Cliente/Proveedor">
+                <button id="search-btn" class="btn btn-primary bg-naranja" ><i class="fa fa-search"></i></button>
                 </div>
+            <span class="counter pull-right"></span>
               
 
 								<div class="btn-group" role="group" aria-label="First group">
 									<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Add-cliente"><i class="fa fa-user-plus" aria-hidden="true"></i> Alta</button>
-									<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalexpresclie"><i class="fa fa-address-book-o" aria-hidden="true"></i> Alta exprés</button>
+
+									<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalexpresclie"><i class="fa fa-exchange-alt"></i> Cargar Archivo</button>
 
 									 <div class="btn-group" role="group"> </div>
                     <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-file-alt"></i></i> Exportar</button>    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                      <a class="dropdown-item" href="">CVS</a>
-                      <!-- <a class="dropdown-item" href="<?= base_URL() ?>/admin/JSon_export?num=<?=$num ?>">JSON</a>
- -->
+                      <a class="dropdown-item" href="assets/plantillas/plantillasnuev/clientes.csv">CVS</a>
+					<a class="dropdown-item" id="exporjsonclie">JSON</a>
+
                     </div>
                 </div>
                 </div>
@@ -39,7 +42,7 @@ $num="";
           </div>
           <!--section button-->
 						<div class="col-12">
-							<table class="table table-hover table-striped">
+            <table class="table table-hover table-bordered results">
 								<thead class="thead-qval">
 									<tr>
 										<th cope="col">#</th>
@@ -47,6 +50,9 @@ $num="";
 										<th cope="col">Nombre Comercial</th>
 										<th cope="col"></th>
 									</tr>
+									<tr class="warning no-result">
+                                           <td colspan="12"><i class="fas fa-exclamation-circle"></i> No se encuentran resultdos...</td>
+                                        </tr>
 								</thead>
 								<tbody>
 									<?php
@@ -64,7 +70,7 @@ $num="";
 															<ul>
 																
 																<li lla="mod-funC" class="dropdown-item" llt="E" llc="<?=$cliente->IDCliente?>">
-																	<i class="fa fa-wrench" aria-hidden="true"></i> Modificar Datos</li>
+																	<i class="fa fa-wrench" aria-hidden="true"></i> Modificar</li>
 																<li lla="del-funC" class="dropdown-item" llt="E" llc="<?=$cliente->IDCliente?>"><i class="fa fa-ban"  aria-hidden="true"></i> Borrar</li>
 																<li lla="qr-funC"  class="dropdown-item"  id="E|<?=$cliente->Usuario?>"><i class="fa fa-qrcode" aria-hidden="true"></i> Código QR</li></ul>
 														</div></div>

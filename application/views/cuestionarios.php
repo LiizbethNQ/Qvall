@@ -19,24 +19,25 @@ $num="";
         <div class="container">
           <div class="row">
             <div class="col-12  m-t-5">
-                  <div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
-                  <div class="input-group">
-                  <input type="text" class="form-control" placeholder="Cuestionario" aria-label="Input group example" aria-describedby="btnGroupAddon2">
-                  <button class="btn btn-primary bg-naranja" >Buscar</button>
+
+
+
+                   <div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups" ng-controller="listadoCtrl">
+                <div class="input-group" id="content-search">
+
+                <input type="text" class="search form-control" placeholder=" Cuestionario">
+                <button id="search-btn" class="btn btn-primary bg-naranja" ><i class="fa fa-search"></i></button>
                 </div>
+            <span class="counter pull-right"></span>
+
   
   <!------------------------------MENU EN CONJUNTO----------------------------------------------------->
 
                   <div class="btn-group" role="group" aria-label="First group">
                    <button class="btn btn-primary" data-toggle="modal" data-target="#msjaltac" ><i class="fas fa-plus-circle"></i></i> Alta Cuestionario</button>
 
-                   <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-file-alt"></i></i> Exportar</button>  
-
-                                         <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">  
-                                           <a class="dropdown-item text2" href="<?= base_URL() ?>/admin/cvs_export?num=<?=$num ?>">CVS</a>
-                      <!-- <a class="dropdown-item text2" id="exporjsongrup"  href="#">JSON</a> -->
-                                       
-                    </div>
+                   
+                                         
                 </div>
             </div>
           </div>
@@ -53,7 +54,7 @@ $num="";
             <div class="col-12 m-t-20">
               <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                  <table class="table table-hover">
+            <table class="table table-hover table-bordered results">
                     <thead class="thead-qval">
                       <tr>
                         <th scope="col">#</th>
@@ -62,6 +63,9 @@ $num="";
                         <th scope="col">Receptor</th>
                         <th scope="col">Acciones</th>
                       </tr>
+                      <tr class="warning no-result">
+                  <td colspan="12"><i class="fas fa-exclamation-circle"></i> No se encuentran resultdos...</td>
+                  </tr>
                     </thead>
                    <?php if($cuestionarios!==false): ?>
                       <tbody>
